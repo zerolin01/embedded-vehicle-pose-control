@@ -55,13 +55,7 @@ Final/
 
 ### 2. 编译与烧录
 
-使用配套 SDK 编译工程：
-```bash
-cd Final
-make clean
-make
-# 烧录到开发板
-```
+使用配套 SDK 编译工程.
 
 ### 3. 运行
 
