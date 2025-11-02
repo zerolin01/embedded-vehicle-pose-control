@@ -137,7 +137,7 @@ void MyMove_SetStraightTarget(float32_t target_yaw_deg);// 设置目标航向
 
 ## 📄 许可证
 
-版权所有 © 2024 林木，欲得必行，文明人@江南大学
+版权所有 © 2025 林木，欲得必行，文明人@江南大学
 
 ---
 
