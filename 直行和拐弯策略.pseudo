@@ -1,0 +1,241 @@
+// --------------------------
+// 公共常量与状态定义
+// 作用：定义全局通用的模式、方向标识和状态变量，统一系统行为标准
+// --------------------------
+
+// 运行模式常量：用于区分小车当前是直行还是转向状态
+MODE_STRAIGHT = 0  // 直行模式：小车执行直线行驶控制
+MODE_TURN = 1      // 转向模式：小车执行转弯控制（如90°左/右拐）
+
+// 转向方向常量：用于明确转弯方向，简化代码中方向的判断
+TURN_LEFT = 1      // 左转弯标识（数值为1，计算目标角度时用+90°）
+TURN_RIGHT = -1    // 右转弯标识（数值为-1，计算目标角度时用-90°）
+
+// 全局状态变量：记录小车当前的运行模式，用于模块间状态同步
+current_mode = MODE_STRAIGHT  // 初始状态设为直行模式
+
+
+// --------------------------
+// 1. 直行控制模块
+// 作用：通过PID算法动态调整左右轮速度，使小车保持直线行驶
+// 核心逻辑：以初始航向角为目标，实时修正航向偏差
+// --------------------------
+
+// 直行PID控制参数（需根据实际小车调试优化）
+STRAIGHT_KP = 1.0  // 比例系数：对当前偏差的响应强度，值越大纠正越快（可能震荡）
+STRAIGHT_KI = 0.1  // 积分系数：对累积偏差的响应，用于消除静态误差（值过大会导致超调）
+STRAIGHT_KD = 0.05 // 微分系数：对偏差变化率的响应，用于抑制震荡（增强稳定性）
+
+// 直行模式状态变量（仅在直行模块内部使用，与转向模块隔离）
+straight_target = 0.0    // 目标航向角：直行的基准角度（初始化为开始直行时的角度）
+straight_last_error = 0.0 // 上一次的角度偏差：用于计算微分项
+straight_integral = 0.0   // 偏差积分和：用于计算积分项（累积小偏差）
+
+// 初始化直行模式
+// 参数：current_angle - 开始直行时的当前航向角（从传感器获取）
+// 作用：设置目标航向、重置PID状态、切换到直行模式
+FUNCTION straight_init(current_angle):
+    straight_target = current_angle  // 以当前角度为基准，作为直行的目标角度
+    straight_last_error = 0.0        // 重置上一次偏差（避免历史数据干扰）
+    straight_integral = 0.0          // 重置积分和（避免历史累积偏差影响）
+    current_mode = MODE_STRAIGHT     // 将系统状态切换为直行模式
+END FUNCTION
+
+// 执行直行控制（核心函数）
+// 参数：
+//   current_angle - 传感器实时获取的当前航向角
+//   base_speed - 直行的基础速度（左右轮的基准速度）
+// 返回值：[left_speed, right_speed] - 计算后的左右轮速度
+FUNCTION straight_execute(current_angle, base_speed):
+    // 1. 计算当前航向与目标航向的偏差（处理360°角度环绕问题）
+    // 例：350°到10°的实际偏差是20°，而非-340°，需修正为合理范围[-180, 180]
+    error = current_angle - straight_target  // 原始偏差 = 当前角度 - 目标角度
+    IF error > 180 THEN 
+        error -= 360  // 若偏差>180°，减去360°（等价于向反方向偏移）
+    ELSE IF error < -180 THEN 
+        error += 360  // 若偏差<-180°，加上360°（等价于向反方向偏移）
+    END IF
+    
+    // 2. 计算PID控制的三个分量
+    p = STRAIGHT_KP * error  // 比例项：与当前偏差成正比，快速响应偏差
+    // 积分项：累积历史偏差，消除长期存在的小误差（带限幅防止积分饱和）
+    straight_integral = CLAMP(straight_integral + error, -1000, 1000)  // 限制积分范围
+    i = STRAIGHT_KI * straight_integral  // 积分项 = 积分系数 × 积分和
+    // 微分项：与偏差变化率成正比，抑制偏差突然变化（减少震荡）
+    d = STRAIGHT_KD * (error - straight_last_error)  // 变化率 = 当前偏差 - 上一次偏差
+    
+    // 3. 计算总调整量并限制范围
+    adjustment = p + i + d  // 总调整量 = 比例项 + 积分项 + 微分项
+    adjustment = CLAMP(adjustment, -50, 50)  // 限制调整幅度（避免轮速突变导致失控）
+    
+    // 4. 计算左右轮速度（核心调整逻辑）
+    // 原理：通过调整左右轮速度差修正航向偏差
+    left_speed = base_speed - adjustment   // 左轮速度 = 基础速度 - 调整量
+    right_speed = base_speed + adjustment  // 右轮速度 = 基础速度 + 调整量
+    // 例：adjustment为正时（小车向左偏）→ 左轮减速、右轮加速 → 向右修正
+    // 例：adjustment为负时（小车向右偏）→ 左轮加速、右轮减速 → 向左修正
+    
+    // 5. 限制轮速在安全范围内（保护电机，避免反转或超速）
+    left_speed = CLAMP(left_speed, 0, 500)   // 左轮速度限制在0~500（单位：转速单位，如rpm）
+    right_speed = CLAMP(right_speed, 0, 500) // 右轮速度限制在0~500
+    
+    // 6. 保存当前偏差，用于下一次计算微分项
+    straight_last_error = error
+    
+    // 返回调整后的左右轮速度
+    RETURN [left_speed, right_speed]
+END FUNCTION
+
+
+// --------------------------
+// 2. 转向控制模块（90°左/右拐）
+// 作用：通过PID算法精确控制转向角度，确保90°转弯精度
+// 核心逻辑：以目标角度（当前角度±90°）为基准，动态调整轮速差直至达标
+// --------------------------
+
+// 转向PID控制参数（与直行不同，因转向动态特性更敏感）
+TURN_KP = 2.0    // 比例系数：转向需更快响应，值比直行大
+TURN_KI = 0.05   // 积分系数：转向允许小误差，值比直行小（避免过度修正）
+TURN_KD = 0.1    // 微分系数：转向易超调，需更强的震荡抑制
+
+// 转向模式状态变量（仅在转向模块内部使用，与直行模块隔离）
+turn_target = 0.0       // 目标转向角度：转弯后的目标角度（当前角度±90°）
+turn_direction = 0      // 转向方向：TURN_LEFT（1）或TURN_RIGHT（-1）
+turn_last_error = 0.0   // 上一次的转向角度偏差：用于计算微分项
+turn_integral = 0.0     // 转向偏差积分和：用于计算积分项
+
+// 初始化转向模式
+// 参数：
+//   current_angle - 开始转向时的当前航向角（从传感器获取）
+//   direction - 转向方向（TURN_LEFT或TURN_RIGHT）
+// 作用：计算目标角度、记录转向方向、重置PID状态、切换到转向模式
+FUNCTION turn_init(current_angle, direction):
+    turn_direction = direction  // 记录转向方向（左或右）
+    
+    // 计算90°转向后的目标角度（处理360°角度环绕）
+    turn_target = current_angle + (90 * direction)  // 左拐+90°，右拐-90°
+    // 确保目标角度在0~360°范围内（如350°+90°=440°→440-360=80°）
+    IF turn_target >= 360 THEN 
+        turn_target -= 360  
+    ELSE IF turn_target < 0 THEN 
+        turn_target += 360  
+    END IF
+    
+    // 重置转向PID状态（避免历史数据干扰）
+    turn_last_error = 0.0  
+    turn_integral = 0.0  
+    current_mode = MODE_TURN  // 将系统状态切换为转向模式
+END FUNCTION
+
+// 执行转向控制（核心函数）
+// 参数：current_angle - 传感器实时获取的当前航向角
+// 返回值：[left_speed, right_speed, is_turn_complete]
+//   left_speed/right_speed：计算后的左右轮速度
+//   is_turn_complete：布尔值，是否完成转向（偏差≤1°）
+FUNCTION turn_execute(current_angle):
+    // 1. 计算当前角度与目标角度的偏差（处理360°环绕）
+    error = turn_target - current_angle  // 原始偏差 = 目标角度 - 当前角度
+    IF error > 180 THEN 
+        error -= 360  // 修正偏差到[-180, 180]范围
+    ELSE IF error < -180 THEN 
+        error += 360  
+    END IF
+    
+    // 2. 判断转向是否完成（偏差在允许范围内，如±1°）
+    IF ABS(error) <= 1.0 THEN
+        RETURN [0, 0, TRUE]  // 返回0速度（停止）和完成信号（TRUE）
+    END IF
+    
+    // 3. 计算转向PID控制的三个分量
+    p = TURN_KP * error  // 比例项：快速响应转向偏差
+    // 积分项：累积小偏差（带限幅，避免转向过度）
+    turn_integral = CLAMP(turn_integral + error, -500, 500)
+    i = TURN_KI * turn_integral  // 积分项 = 积分系数 × 积分和
+    // 微分项：抑制转向过程中的震荡（避免过冲目标角度）
+    d = TURN_KD * (error - turn_last_error)
+    
+    // 4. 计算轮速差（控制转向幅度）并限制范围
+    speed_diff = p + i + d  // 总速度差 = 三个分量之和
+    speed_diff = CLAMP(speed_diff, -150, 150)  // 限制最大差速（避免转向过急）
+    
+    // 5. 根据转向方向计算左右轮速度
+    base_turn_speed = 100  // 转向基础速度（低于直行，保证转向稳定性）
+    IF turn_direction = TURN_LEFT THEN
+        // 左转弯：左轮速度略低，右轮速度略高（形成向左的转向力矩）
+        left_speed = base_turn_speed - (speed_diff / 2)
+        right_speed = base_turn_speed + (speed_diff / 2)
+    ELSE
+        // 右转弯：左轮速度略高，右轮速度略低（形成向右的转向力矩）
+        left_speed = base_turn_speed + (speed_diff / 2)
+        right_speed = base_turn_speed - (speed_diff / 2)
+    END IF
+    
+    // 6. 限制转向时的轮速（避免超速，确保转向平稳）
+    left_speed = CLAMP(left_speed, 0, 300)
+    right_speed = CLAMP(right_speed, 0, 300)
+    
+    // 7. 保存当前偏差，用于下一次计算微分项
+    turn_last_error = error
+    
+    // 返回轮速和未完成信号（FALSE）
+    RETURN [left_speed, right_speed, FALSE]
+END FUNCTION
+
+
+// --------------------------
+// 主控制流程示例
+// 作用：演示如何按任务列表顺序执行直行和转向操作，模拟实际路径规划
+// --------------------------
+FUNCTION main_control():
+    // 任务列表：定义小车的行驶路径（直行距离或转向方向）
+    tasks = [
+        {type: "straight", distance: 100},  // 任务1：直行100cm
+        {type: "turn", direction: TURN_RIGHT},  // 任务2：右拐90°
+        {type: "straight", distance: 100},  // 任务3：直行100cm
+        {type: "turn", direction: TURN_LEFT},   // 任务4：左拐90°
+        {type: "straight", distance: 100}   // 任务5：直行100cm
+    ]
+    
+    // 遍历任务列表，依次执行每个任务
+    FOR EACH task IN tasks DO
+        // 若当前任务是直行
+        IF task.type = "straight" THEN
+            // 初始化直行：以当前角度为目标航向
+            current_angle = 传感器获取航向角()  // 从陀螺仪/磁罗盘获取实时角度
+            straight_init(current_angle)
+            
+            // 循环执行直行，直到行驶距离达到目标
+            distance_traveled = 0  // 已行驶距离（初始为0）
+            WHILE distance_traveled < task.distance DO
+                current_angle = 传感器获取航向角()  // 实时更新当前角度
+                // 计算左右轮速度（基础速度200）
+                [left, right] = straight_execute(current_angle, 200)
+                电机设置速度(left, right)  // 输出速度到电机
+                
+                // 通过编码器更新已行驶距离（累加每周期的距离增量）
+                distance_traveled += 编码器获取距离增量()
+                延迟(20)  // 20ms控制周期（平衡响应速度和稳定性）
+            END WHILE
+            电机停止()  // 直行任务完成，停止电机
+        
+        // 若当前任务是转向
+        ELSE IF task.type = "turn" THEN
+            // 初始化转向：以当前角度计算目标角度
+            current_angle = 传感器获取航向角()
+            turn_init(current_angle, task.direction)
+            
+            // 循环执行转向，直到完成（偏差≤1°）
+            is_complete = FALSE  // 转向完成标志（初始为未完成）
+            WHILE NOT is_complete DO
+                current_angle = 传感器获取航向角()  // 实时更新当前角度
+                // 计算轮速和完成状态
+                [left, right, is_complete] = turn_execute(current_angle)
+                电机设置速度(left, right)  // 输出速度到电机
+                
+                延迟(20)  // 20ms控制周期（与直行保持一致）
+            END WHILE
+            电机停止()  // 转向任务完成，停止电机
+            延迟(100)  // 转向后停顿100ms（让小车稳定，避免惯性影响下一段直行）
+        END IF
+    END FOR
+END FUNCTION

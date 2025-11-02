@@ -1,0 +1,50 @@
+# 编译输出
+Debug/
+Release/
+*.o
+*.elf
+*.bin
+*.hex
+*.map
+*.lst
+*.d
+*.su
+
+# IDE 配置
+.vscode/
+.idea/
+*.code-workspace
+*.workspace
+*.project
+*.cproject
+*.settings/
+
+# 临时文件
+*.log
+*.tmp
+*.bak
+*~
+*.swp
+*.swo
+
+# 软著生成物（可选：若不想提交合并稿）
+docs/软著/源代码选编/selected_code.txt
+docs/软著/提交代码版本/code/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python (如果有测试脚本)
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# 备份文件
+*.orig
+*.backup
+

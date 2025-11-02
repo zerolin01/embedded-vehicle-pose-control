@@ -1,0 +1,132 @@
+<Iopmp Name="iopmp" Display="IOPMP Configuration"
+       hinclude="iopmp_driver.h" Instance='{"num":1,"name":"INST_IOPMP","select":0}' Lock="false">
+    <Collection Display="IOPMP Master Access Right" Name="iopmp_master_access_right_t"
+                StructName="g_stAccessRightConfig{$}" Number="1" Select="0" Part="IOPMP_MASTER_ACCESS_RIGHT_T">
+        <IOPMP_MASTER_ACCESS_RIGHT_T Name="iopmp_master_access_right_t">
+            <Value Name="masterNum" Display="Master number" Value="0"/>
+            <Check Name="regionLock" Display="Lock region" Value="true"/>
+            <Value Name="regionSize" Display="Memory region size"
+                   Value="0x0"/>
+            <Multi Name="accessRight" Display="Access right">
+                <Item Name="IOPMP_MACHINE_NONE_USER_NONE" value="0"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_R" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_RW" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_R" value="1"/>
+                <Select Index="0"/>
+            </Multi>
+            <SEPARATOR/>
+            <Value Name="masterNum" Display="Master number" Value="1"/>
+            <Check Name="regionLock" Display="Lock region" Value="true"/>
+            <Value Name="regionSize" Display="Memory region size"
+                   Value="0x0"/>
+            <Multi Name="accessRight" Display="Access right">
+                <Item Name="IOPMP_MACHINE_NONE_USER_NONE" value="0"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_R" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_RW" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_R" value="1"/>
+                <Select Index="0"/>
+            </Multi>
+            <SEPARATOR/>
+            <Value Name="masterNum" Display="Master number" Value="2"/>
+            <Check Name="regionLock" Display="Lock region" Value="true"/>
+            <Value Name="regionSize" Display="Memory region size" Value="0x0"/>
+            <Multi Name="accessRight" Display="Access right">
+                <Item Name="IOPMP_MACHINE_NONE_USER_NONE" value="0"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_R" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_RW" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_R" value="1"/>
+                <Select Index="0"/>
+            </Multi>
+            <SEPARATOR/>
+            <Value Name="masterNum" Display="Master number" Value="3"/>
+            <Check Name="regionLock" Display="Lock region" Value="true"/>
+            <Value Name="regionSize" Display="Memory region size"
+                   Value="0x0"/>
+            <Multi Name="accessRight" Display="Access right">
+                <Item Name="IOPMP_MACHINE_NONE_USER_NONE" value="0"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_R" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_RW" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_R" value="1"/>
+                <Select Index="0"/>
+            </Multi>
+        </IOPMP_MASTER_ACCESS_RIGHT_T>
+        <Part Name="iopmp_master_access_right_t" Index="0" StructName="g_stAccessRightConfig0">
+            <Value Name="masterNum" Display="Master number" Value="0"/>
+            <Check Name="regionLock" Display="Lock region" Value="true"/>
+            <Value Name="regionSize" Display="Memory region size"
+                   Value="0x0"/>
+            <Multi Name="accessRight" Display="Access right">
+                <Item Name="IOPMP_MACHINE_NONE_USER_NONE" value="0"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_R" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_RW" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_R" value="1"/>
+                <Select Index="0"/>
+            </Multi>
+            <SEPARATOR/>
+            <Value Name="masterNum" Display="Master number" Value="1"/>
+            <Check Name="regionLock" Display="Lock region" Value="true"/>
+            <Value Name="regionSize" Display="Memory region size"
+                   Value="0x0"/>
+            <Multi Name="accessRight" Display="Access right">
+                <Item Name="IOPMP_MACHINE_NONE_USER_NONE" value="0"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_R" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_RW" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_R" value="1"/>
+                <Select Index="0"/>
+            </Multi>
+            <SEPARATOR/>
+            <Value Name="masterNum" Display="Master number" Value="2"/>
+            <Check Name="regionLock" Display="Lock region" Value="true"/>
+            <Value Name="regionSize" Display="Memory region size" Value="0x0"/>
+            <Multi Name="accessRight" Display="Access right">
+                <Item Name="IOPMP_MACHINE_NONE_USER_NONE" value="0"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_R" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_RW" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_R" value="1"/>
+                <Select Index="0"/>
+            </Multi>
+            <SEPARATOR/>
+            <Value Name="masterNum" Display="Master number" Value="3"/>
+            <Check Name="regionLock" Display="Lock region" Value="true"/>
+            <Value Name="regionSize" Display="Memory region size"
+                   Value="0x0"/>
+            <Multi Name="accessRight" Display="Access right">
+                <Item Name="IOPMP_MACHINE_NONE_USER_NONE" value="0"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_R" value="1"/>
+                <Item Name="IOPMP_MACHINE_RW_USER_RW" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_NONE" value="1"/>
+                <Item Name="IOPMP_MACHINE_R_USER_R" value="1"/>
+                <Select Index="0"/>
+            </Multi>
+        </Part>
+    </Collection>
+    <Array Display="IOPMP User Config" Name="iopmp_user_config_t"
+           Number="1" Select="0" DefineNum="IOPMP_REGION_NUM_CONFIGS" StructName="g_stIopmpUserConfig"
+           Part="IOPMP_USER_CONFIG_T">
+        <IOPMP_USER_CONFIG_T Name="iopmp_user_config_t">
+            <DynamicSelect Name="masterAccRight" Display="Master Access right" Value=""/>
+            <Check Name="addrLock" Display="Address Lock" Value="true"/>
+            <Value Name="startAddr" Display="Memory region start address" Value="0x0"/>
+        </IOPMP_USER_CONFIG_T>
+        <Part Name="iopmp_user_config_t" Index="0">
+            <DynamicSelect Name="masterAccRight" Display="Master Access right" Value="g_stAccessRightConfig0"/>
+            <Check Name="addrLock" Display="Address Lock" Value="true"/>
+            <Value Name="startAddr" Display="Memory region start address" Value="0x0"/>
+        </Part>
+    </Array>
+</Iopmp>

@@ -1,0 +1,85 @@
+<CorrespondingRelation>
+	<PinmuxViewConfig>
+		<Item Name="deviceId" Desc="指定外设的Id"/>
+		<Item Name="deviceName" Desc="指定外设的名称"/>
+		<Item Name="pin" Desc="已路由引脚的名称"/>
+		<Item Name="pullConfig" Desc="Internal resistor pull feature selection.">
+			<Opt Value="Pull Down" Desc="Internal pull-down resistor is enabled."/>
+			<Opt Value="Pull Up" Desc="Internal pull-up resistor is enabled."/>
+			<Opt Value="Disabled" Desc="Internal pull-down or pull-up resistor is not enabled."/>
+		</Item>
+		<Item Name="driveSelect" Desc="Configures the drive strength.">
+			<Opt Value="StrengthLv1" Desc="Resistor is set to 10mA(VDDIO=5V)."/>
+			<Opt Value="StrengthLv2" Desc="Resistor is set to 15mA(VDDIO=5V)."/>
+			<Opt Value="StrengthLv3" Desc="Resistor is set to 20mA(VDDIO=5V)."/>
+			<Opt Value="StrengthLv0" Desc="Resistor is set to 3mA(VDDIO=5V)."/>
+		</Item>
+		<Item Name="direction" Desc="Configures the port data direction.">
+			<Opt Value="Input" Desc="General purpose input direction."/>
+			<Opt Value="Output" Desc="General purpose output direction."/>
+			<Opt Value="Not Specified" Desc="General purpose unspecified direction."/>
+		</Item>
+		<Item Name="initValue" Desc="Pin output initial value.">
+			<Opt Value="Hight" Desc="Pin output initial value is high."/>
+			<Opt Value="Low" Desc="Pin output initial value is low."/>
+		</Item>
+		<Item Name="intConfig" Desc="Interrupt generation condition.">
+			<Opt Value="ISF flag and Interrupt on rising edge" Desc="Interrupt on rising edge."/>
+			<Opt Value="ISF flag and Interrupt on falling edge" Desc="Interrupt on falling edge."/>
+			<Opt Value="ISF flag and Interrupt on either edge" Desc="Interrupt on either edge."/>
+			<Opt Value="ISF flag and Interrupt when logic 0" Desc="Interrupt when logic 0."/>
+			<Opt Value="ISF flag and Interrupt when logic 1" Desc="Interrupt when logic 1."/>
+			<Opt Value="Interrupt Status Flag (ISF) is disabled" Desc="Disable interrupt."/>
+		</Item>
+		<Item Name="clearIntFlag" Desc="Clears the interrupt status flag or not.">
+			<Opt Value="Clear Flag" Desc="Clears the interrupt status flag during init."/>
+			<Opt Value="Not Clear Flag" Desc="Don't clear the interrupt status flag during init."/>
+		</Item>
+		<Item Name="debounceEnable" Desc="Enable debounce or not.">
+			<Opt Value="Enabled" Desc="Enable debounce."/>
+			<Opt Value="Disabled" Desc="Disable debounce."/>
+		</Item>
+	</PinmuxViewConfig>
+	<PinSettingsConfig>
+		<Item Name="base" SrcItem="gpioFunc"/>
+		<Item Name="pinPortIdx" SrcItem="gpioFunc"/>
+		<Item Name="pullConfig" SrcItem="pullConfig">
+			<Opt Value="PORT_INTERNAL_PULL_DOWN_ENABLED" SrcOpt="Pull Down"/>
+			<Opt Value="PORT_INTERNAL_PULL_UP_ENABLED" SrcOpt="Pull Up"/>
+			<Opt Value="PORT_INTERNAL_PULL_NOT_ENABLED" SrcOpt="Disabled"/>
+		</Item>
+		<Item Name="driveSelect" SrcItem="driveSelect">
+			<Opt Value="PORT_STR1_DRIVE_STRENGTH" SrcOpt="StrengthLv1"/>
+			<Opt Value="PORT_STR2_DRIVE_STRENGTH" SrcOpt="StrengthLv2"/>
+			<Opt Value="PORT_STR3_DRIVE_STRENGTH" SrcOpt="StrengthLv3"/>
+			<Opt Value="PORT_STR0_DRIVE_STRENGTH" SrcOpt="StrengthLv0"/>
+		</Item>
+		<Item Name="mux" SrcItem="gpioFunc"/>
+		<Item Name="isGpio" SrcItem="gpioFunc"/>
+		<Item Name="direction" SrcItem="direction">
+			<Opt Value="GPIO_INPUT_DIRECTION" SrcOpt="Input"/>
+			<Opt Value="GPIO_OUTPUT_DIRECTION" SrcOpt="Output"/>
+			<Opt Value="GPIO_UNSPECIFIED_DIRECTION" SrcOpt="Not Specified"/>
+		</Item>
+		<Item Name="initValue" SrcItem="initValue">
+			<Opt Value="1" SrcOpt="Hight"/>
+			<Opt Value="0" SrcOpt="Low"/>
+		</Item>
+		<Item Name="intConfig" SrcItem="intConfig">
+			<Opt Value="PORT_INT_RISING_EDGE" SrcOpt="ISF flag and Interrupt on rising edge"/>
+			<Opt Value="PORT_INT_FALLING_EDGE" SrcOpt="ISF flag and Interrupt on falling edge"/>
+			<Opt Value="PORT_INT_EITHER_EDGE" SrcOpt="ISF flag and Interrupt on either edge"/>
+			<Opt Value="PORT_INT_LOW_LEVEL" SrcOpt="ISF flag and Interrupt when logic 0"/>
+			<Opt Value="PORT_INT_HIGH_LEVEL" SrcOpt="ISF flag and Interrupt when logic 1"/>
+			<Opt Value="PORT_INT_DISABLED" SrcOpt="Interrupt Status Flag (ISF) is disabled"/>
+		</Item>
+		<Item Name="clearIntFlag" SrcItem="clearIntFlag">
+			<Opt Value="true" SrcOpt="Clear Flag"/>
+			<Opt Value="false" SrcOpt="Not Clear Flag"/>
+		</Item>
+		<Item Name="debounceEnable" SrcItem="debounceEnable">
+			<Opt Value="true" SrcOpt="Enabled"/>
+			<Opt Value="false" SrcOpt="Disabled"/>
+		</Item>
+	</PinSettingsConfig>
+</CorrespondingRelation>

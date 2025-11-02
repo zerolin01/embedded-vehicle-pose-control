@@ -1,0 +1,3112 @@
+adc:
+  adc_converter_config_t:
+    sampleRate:
+      info: ADC sample rate (sps).
+      type: uint32_t
+      range: 100000-200000
+      default: '100000'
+    resolution:
+      info: ADC resolution
+      type: enums
+      range: null
+      default: 'ADC_RESOLUTION_12BIT'
+    trigger:
+      info: ADC trigger type (software, hardware) - affects only the first control channel.
+      type: enums
+      range: null
+      default: 'ADC_TRIGGER_SOFTWARE'
+    pretriggerSel:
+      info: Pretrigger source selected from Trigger Latching and Arbitration Unit affects only the first 4 control channels.
+      type: enums
+      range: null
+      default: 'ADC_PRETRIGGER_SEL_PDU'
+    triggerSel:
+      info: Trigger source selected from Trigger Latching and Arbitration Unit.
+      type: enums
+      range: null
+      default: 'ADC_TRIGGER_SEL_PDU'
+    dmaEnable:
+      info: Enable ADMA for the ADC.
+      type: bool
+      range: null
+      default: 'false'
+    dataFmt:
+      info: ADMA data format.
+      type: enums
+      range: null
+      default: 'ADC_ADMA_DATAFMT_MODE1'
+    continuousConvEnable:
+      info: Enable Continuous conversions.
+      type: bool
+      range: null
+      default: 'false'
+    scanningEnable:
+      info: Enable Scanning mode conversions.
+      type: bool
+      range: null
+      default: 'false'
+    scanningChannles:
+      info: Scanning channles.
+      type: scan_channel_type_t
+      range: null
+      default: '0'
+  adc_compare_config_t:
+    compareEnable:
+      info: Enable the compare feature.
+      type: bool
+      range: null
+      default: 'false'
+    compareGreaterThanEnable:
+      info: Enable Greater-Than functionality.
+      type: bool
+      range: null
+      default: 'false'
+    compareRangeFuncEnable:
+      info: Enable Range functionality.
+      type: bool
+      range: null
+      default: 'false'
+    compVal1:
+      info: First Compare Value.
+      type: uint16_t
+      range: null
+      default: '0x0U'
+    compVal2:
+      info: Second Compare Value.
+      type: uint16_t
+      range: null
+      default: '0x0U'
+  adc_average_config_t:
+    hwAvgEnable:
+      info: Enable averaging functionality.
+      type: bool
+      range: null
+      default: 'false'
+    hwAverage:
+      info: Selection for number of samples used for averaging.
+      type: enums
+      range: null
+      default: 'ADC_AVERAGE_4'
+  adc_chan_config_t:
+    interruptEnable:
+      info: Enable interrupts for this channel.
+      type: bool
+      range: null
+      default: 'false'
+    channel:
+      info: Selection of input channel for measurement.
+      type: enums
+      range: null
+      default: 'ADC_INPUTCHAN_EXT8'
+
+pdma:
+  pdma_channel_config_t:
+    callback:
+      default: 'NULL'
+      info: Callback that will be registered for this channel.
+      range: null
+      type: pdma_callback_t
+    callbackParam:
+      default: 'NULL'
+      info: Parameter passed to the channel callback.
+      range: null
+      type: void *
+    channelPriority:
+      default: 'PDMA_CHN_DEFAULT_PRIORITY'
+      info: null
+      range: null
+      type: enums
+    enableTrigger:
+      default: 'false'
+      info: Enables the periodic trigger capability for the PDMA channel.
+      range: null
+      type: bool
+    groupPriority:
+      default: 'PDMA_GRP0_PRIO_LOW_GRP1_PRIO_HIGH'
+      info: null
+      range: null
+      type: enums
+    source:
+      default: 'PDMA_REQ_DISABLED'
+      info: Selects the source of the PDMA request for this channel.
+      range: null
+      type: dma_request_source_t
+    virtChnConfig:
+      default: '0'
+      info: PDMA virtual channel number.
+      range: null
+      type: uint8_t
+  pdma_chn_state_t:
+    callback:
+      default: 'null'
+      info: null
+      range: null
+      type: pdma_callback_t
+    parameter:
+      default: 'null'
+      info: null
+      range: null
+      type: void *
+    status:
+      default: 'null'
+      info: null
+      range: null
+      type: volatile pdma_chn_status_t
+    virtChn:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+  pdma_loop_transfer_config_t:
+    dstOffsetEnable:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    majorLoopChnLinkEnable:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    majorLoopChnLinkNumber:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+    majorLoopIterationCount:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    minorLoopChnLinkEnable:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    minorLoopChnLinkNumber:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+    minorLoopOffset:
+      default: 'null'
+      info: null
+      range: null
+      type: int32_t
+    srcOffsetEnable:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+  pdma_software_tcd_t:
+    ATTR:
+      default: 'null'
+      info: null
+      range: null
+      type: uint16_t
+    BITER:
+      default: 'null'
+      info: null
+      range: null
+      type: uint16_t
+    CITER:
+      default: 'null'
+      info: null
+      range: null
+      type: uint16_t
+    CSR:
+      default: 'null'
+      info: null
+      range: null
+      type: uint16_t
+    DADDR:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    DLAST_SGA:
+      default: 'null'
+      info: null
+      range: null
+      type: int32_t
+    DOFF:
+      default: 'null'
+      info: null
+      range: null
+      type: int16_t
+    NBYTES:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    SADDR:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    SLAST:
+      default: 'null'
+      info: null
+      range: null
+      type: int32_t
+    SOFF:
+      default: 'null'
+      info: null
+      range: null
+      type: int16_t
+  pdma_state_t:
+    virtChnState:
+      default: 'null'
+      info: null
+      range: null
+      type: pdma_chn_state_t * volatile
+  pdma_transfer_config_t:
+    destAddr:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    destLastAddrAdjust:
+      default: 'null'
+      info: null
+      range: null
+      type: int32_t
+    destModulo:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+    destOffset:
+      default: 'null'
+      info: null
+      range: null
+      type: int16_t
+    destTransferSize:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+    interruptEnable:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    loopTransferConfig:
+      default: 'null'
+      info: null
+      range: null
+      type: pdma_loop_transfer_config_t *
+    minorByteTransferCount:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    srcAddr:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    srcLastAddrAdjust:
+      default: 'null'
+      info: null
+      range: null
+      type: int32_t
+    srcModulo:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+    srcOffset:
+      default: 'null'
+      info: null
+      range: null
+      type: int16_t
+    srcTransferSize:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+  pdma_user_config_t:
+    chnArbitration:
+      default: 'PDMA_ARBITRATION_FIXED_PRIORITY'
+      info: PDMA channel arbitration.
+      range: null
+      type: enums
+    groupArbitration:
+      default: 'PDMA_ARBITRATION_FIXED_PRIORITY'
+      info: PDMA group arbitration.
+      range: null
+      type: enums
+    groupPriority:
+      default: 'PDMA_GRP0_PRIO_LOW_GRP1_PRIO_HIGH'
+      info: null
+      range: null
+      type: enums
+    haltOnError:
+      default: 'false'
+      info: null
+      range: null
+      type: bool
+
+adma:
+  adma_transfer_config_t:
+    srcAddr:
+      info: Memory address pointing to the source data.
+      type: uint32_t
+      range: null
+      default: 'null'
+    destAddr:
+      info: Memory address pointing to the destination data.
+      type: uint32_t
+      range: null
+      default: 'null'
+    bufferSize:
+      info: Size of buffer to transfer.
+      type: uint32_t
+      range: null
+      default: 'null'
+    rdTokens:
+      info: Maximum number of bytes of an AHB read burst.
+      type: uint32_t
+      range: null
+      default: 'null'
+    rdBrustSize:
+      info: Number of AHB read commands to issue before the channel is released.
+      type: uint32_t
+      range: null
+      default: 'null'
+    wrTokens:
+      info: Number of AHB write commands to issue before the channel is released.
+      type: uint32_t
+      range: null
+      default: 'null'
+    wrBrustSize:
+      info: Maximum number of bytes of an AHB write burst.
+      type: uint32_t
+      range: null
+      default: 'null'
+    interruptEnable:
+      info: Enable the interrupt request when transfer completes
+      type: bool
+      range: null
+      default: 'null'
+    periphConfig:
+      info: null
+      type: adma_peripheral_config_t
+      range: null
+      default: 'null'
+  
+  adma_channel_config_t:
+    callback:
+      default: 'NULL'
+      info: Callback that will be registered for this channel.
+      range: null
+      type: adma_callback_t
+    callbackParam:
+      default: 'NULL'
+      info: Parameter passed to the channel callback.
+      range: null
+      type: void *
+    channel:
+      default: 'ADMA_CHN0_NUMBER'
+      info: ADMA channel number.
+      range: null
+      type: uint8_t
+  adma_chn_state_t:
+    callback:
+      default: 'null'
+      info: null
+      range: null
+      type: adma_callback_t
+    channel:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+    parameter:
+      default: 'null'
+      info: null
+      range: null
+      type: void *
+    status:
+      default: 'null'
+      info: null
+      range: null
+      type: volatile adma_chn_status_t
+  adma_peripheral_config_t:
+    rdPeriphDelay:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    rdPeriphNum:
+      default: 'null'
+      info: null
+      range: null
+      type: adma_periph_num_t
+    wrPeriphDelay:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    wrPeriphNum:
+      default: 'null'
+      info: null
+      range: null
+      type: adma_periph_num_t
+  adma_state_t:
+    dmaChnState:
+      default: 'null'
+      info: null
+      range: null
+      type: adma_chn_state_t * volatile
+  adma_user_config_t:
+    core0Mode:
+      default: 'ADMA_OPERATION_INDEPENDENT_MODE'
+      info: ADMA operation mode.
+      range: null
+      type: enums
+    core1ClkdivRatio:
+      default: '1'
+      info: Ratio between main clock and core 1 clock.
+      range: null
+      type: uint32_t
+    core1Mode:
+      default: 'ADMA_OPERATION_INDEPENDENT_MODE'
+      info: ADMA operation mode.
+      range: null
+      type: enums
+
+flexcan:
+  flexcan_data_info_t:
+    data_length:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    enable_brs:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    fd_enable:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    fd_padding:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+    is_remote:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    msg_id_type:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+  flexcan_enhancedIdTableType_t:
+    filterType:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+    id1:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    id2:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    isExtendedFrame:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    rtr1:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    rtr2:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+  flexcan_id_table_t:
+    id:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    isExtendedFrame:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    isRemoteFrame:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+  flexcan_mb_handle_t:
+    isBlocking:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    isDmaBusy:
+      default: 'null'
+      info: null
+      range: null
+      type: volatile bool
+    isPolling:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    isRemote:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    mbSema:
+      default: 'null'
+      info: null
+      range: null
+      type: OS_SemaphoreId_t
+    mb_message:
+      default: 'null'
+      info: null
+      range: null
+      type: flexcan_msgbuff_t *
+    state:
+      default: 'null'
+      info: null
+      range: null
+      type: volatile flexcan_mb_state_t
+    time_stamp:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+  flexcan_msgbuff_t:
+    cs:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    data:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+    dataLen:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+    id_hit:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+    msgId:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    time_stamp:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+  flexcan_payload_block_size_t:
+    blockR0:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+    blockR1:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+    blockR2:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+    blockR3:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+  flexcan_pn_config_t:
+    filterComb:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+    idFilter1:
+      default: 'null'
+      info: null
+      range: null
+      type: classes
+    idFilter2:
+      default: 'null'
+      info: null
+      range: null
+      type: classes
+    idFilterType:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+    matchTimeout:
+      default: 'null'
+      info: null
+      range: null
+      type: uint16_t
+    numMatches:
+      default: 'null'
+      info: null
+      range: null
+      type: uint16_t
+    payloadFilter:
+      default: 'null'
+      info: null
+      range: null
+      type: classes
+    payloadFilterType:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+    wakeUpMatch:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    wakeUpTimeout:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+  flexcan_pn_id_filter_t:
+    extendedId:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    id:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    remoteFrame:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+  flexcan_pn_payload_filter_t:
+    dlcHigh:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+    dlcLow:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+    payload1:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+    payload2:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+  flexcan_state_t:
+    bIsEnhancedFifoEn:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    bIsLegacyFifoEn:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    callback:
+      default: 'null'
+      info: null
+      range: null
+      type: void ( * ) ( uint8_t instance, flexcan_event_type_t eventType, uint32_t buffIdx, struct flexcan_state_t * driverState )
+    callbackParam:
+      default: 'null'
+      info: null
+      range: null
+      type: void *
+    enhancedFifoOutput:
+      default: 'null'
+      info: null
+      range: null
+      type: classes
+    errorCallbackParam:
+      default: 'null'
+      info: null
+      range: null
+      type: void *
+    error_callback:
+      default: 'null'
+      info: null
+      range: null
+      type: void ( * ) ( uint8_t instance, flexcan_event_type_t eventType, struct flexcan_state_t * driverState )
+    isIntActive:
+      default: 'null'
+      info: null
+      range: null
+      type: bool
+    mbs:
+      default: 'null'
+      info: null
+      range: null
+      type: classes
+    rxFifoDMAChannel:
+      default: 'null'
+      info: null
+      range: null
+      type: uint8_t
+    transferType:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+    u32MaxMbNum:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+    u32NumOfMbTransferByDMA:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+  flexcan_timeStampConfigType_t:
+    hrConfigType:
+      default: 'FLEXCAN_TIMESTAMPCAPTURE_DISABLE'
+      info: This field configures the point in time when a 32-bit time base is captured during a CAN frame and stored in the high resolution time stamp.
+      range: null
+      type: enums
+    msgBuffTimeStampType:
+      default: 'FLEXCAN_MSGBUFFTIMESTAMP_TIMER'
+      info: null
+      range: null
+      type: enums
+    timeStampSource:
+      default: 'FLEXCAN_CAN_CLK_TIMESTAMP_SRC'
+      info: Timestamp Timer Source selection.
+      range: null
+      type: enums
+  flexcan_time_segment_t:
+    phaseSeg1:
+      default: '13UL'
+      info: Phase segment 1.
+      range: null
+      type: uint32_t
+    phaseSeg2:
+      default: '13UL'
+      info: Phase segment 2.
+      range: null
+      type: uint32_t
+    preDivider:
+      default: '0UL'
+      info: Clock prescaler division factor.
+      range: null
+      type: uint32_t
+    propSeg:
+      default: '10UL'
+      info: Propagation segment.
+      range: null
+      type: uint32_t
+    rJumpwidth:
+      default: '3UL'
+      info: Resync jump width.
+      range: null
+      type: uint32_t
+  flexcan_user_config_t:
+    bitrate:
+      default: 'null'
+      info: null
+      range: null
+      type: classes
+    bitrate_cbt:
+      default: 'null'
+      info: null
+      range: null
+      type: classes
+    fd_enable:
+      default: 'true'
+      info: Enable/Disable the Flexible Data Rate feature.
+      range: null
+      type: bool
+    flexcanMode:
+      default: 'FLEXCAN_NORMAL_MODE'
+      info: User configurable FlexCAN operation modes.
+      range: null
+      type: enums
+    is_enhanced_rx_fifo_needed:
+      default: 'false'
+      info: null
+      range: null
+      type: bool
+    is_rx_fifo_needed:
+      default: 'false'
+      info: 1 if needed; 0 if not. This controls whether the Rx FIFO feature is enabled
+        or not.
+      range: null
+      type: bool
+    max_num_mb:
+      default: '21UL'
+      info: The maximum number of Message Buffers.
+      range: 1,128UL
+      type: uint32_t
+    num_enhanced_ext_id_filters:
+      default: '0UL'
+      info: The number of enhanced extended ID filter elements.
+      range: 0,127UL
+      type: uint32_t
+    num_enhanced_std_id_filters:
+      default: '2UL'
+      info: The number of enhanced standard ID filter elements.
+      range: 0,63UL
+      type: uint32_t
+    num_enhanced_watermark:
+      default: '0UL'
+      info: The number of enhanced Rx FIFO watermark.
+      range: 0,63UL
+      type: uint32_t
+    num_id_filters:
+      default: 'null'
+      info: null
+      range: null
+      type: enums
+    payload:
+      default: 'FLEXCAN_PAYLOAD_SIZE_64'
+      info: The payload size of the mailboxes specified in bytes.
+      range: null
+      type: classes
+    pe_clock:
+      default: 'FLEXCAN_CLK_SOURCE_PERIPH'
+      info: The clock source of the CAN Protocol Engine (PE).
+      range: null
+      type: enums
+    rxFifoDMAChannel:
+      default: '0U'
+      info: Specifies the PDMA channel number to be used for PDMA transfers.
+      range: null
+      type: uint8_t
+    time_stamp:
+      default: 'null'
+      info: null
+      range: null
+      type: classes
+    transfer_type:
+      default: 'FLEXCAN_RXFIFO_USING_INTERRUPTS'
+      info: Specifies if the Rx FIFO uses interrupts or PDMA.
+      range: null
+      type: enums
+
+cmp:
+  cmp_comparator_t:
+    dmaTriggerState:
+      info: True if PDMA transfer trigger from comparator is enable.
+      type: bool
+      range: null
+      default: 'false'
+    outputInterruptTrigger:
+      info: CMP_BOTH_EDGES comparator output would trigger an interrupt on rising and falling edges.
+      type: enums
+      range: null
+      default: 'CMP_BOTH_EDGES'
+    mode:
+      info: Configuration structure which define
+      type: enums
+      range: null
+      default: 'CMP_CONTINUOUS'
+    filterSamplePeriod:
+      info: Filter sample period.
+      type: uint8_t
+      range: null
+      default: '0xF'
+    filterSampleCount:
+      info: Number of sample count for filtering.
+      type: uint8_t
+      range: null
+      default: '0'
+    powerMode:
+      info: CMP_HIGH_SPEED if high speed mode is selected.
+      type: enums
+      range: null
+      default: 'CMP_LOW_SPEED'
+    inverterState:
+      info: CMP_INVERT if inverts the comparator output.
+      type: enums
+      range: null
+      default: 'CMP_NORMAL'
+    pinState:
+      info: CMP_AVAILABLE if comparator output is available to package pin.
+      type: enums
+      range: null
+      default: 'CMP_AVAILABLE'
+    outputSelect:
+      info: CMP_COUTA if output signal is equal to COUTA(unfiltered).
+      type: enums
+      range: null
+      default: 'CMP_COUTA'
+    hysteresisLevel:
+      info: CMP_LEVEL_HYS_EN if hard block output has level 1 hysteresis.
+      type: enums
+      range: null
+      default: 'CMP_LEVEL_HYS_DISABLED'
+  cmp_anmux_t:
+    positivePortMux:
+      info: CMP_MUX if source is 8 ch MUX.
+      type: enums
+      range: null
+      default: 'CMP_MUX'
+    negativePortMux:
+      info: CMP_MUX if source is 8 ch MUX.
+      type: enums
+      range: null
+      default: 'CMP_MUX'
+    positiveInputMux:
+      info: Select which channel is selected for the plus mux.
+      type: cmp_ch_number_t
+      range: null
+      default: '0'
+    negativeInputMux:
+      info: Select which channel is selected for the minus mux.
+      type: cmp_ch_number_t
+      range: null
+      default: '1'
+  cmp_trigger_mode_t:
+    roundRobinState:
+      info: True if Round-Robin is enabled.
+      type: bool
+      range: null
+      default: 'false'
+    roundRobinInterruptState:
+      info: True if Round-Robin interrupt is enabled.
+      type: bool
+      range: null
+      default: 'false'
+    fixedPort:
+      info: CMP_MINUS_FIXED if minus port is fixed.
+      type: enums
+      range: null
+      default: 'CMP_PLUS_FIXED'
+    fixedChannel:
+      info: Select which channel would be assigned to the fixed port.
+      type: cmp_ch_number_t
+      range: null
+      default: '0'
+    samples:
+      info: Select number of round-robin clock cycles for a given channel.
+      type: uint8_t
+      range: null
+      default: '0'
+    initializationDelay:
+      info: Select dac and comparator initialization delay(clock cycles).
+      type: uint16_t
+      range: null
+      default: '0'
+    roundRobinChannelsState:
+      info: One bite for each channel state.
+      type: cmp_ch_list_t
+      range: null
+      default: '0'
+    programedState:
+      info: Pre-programmed state for comparison result.
+      type: cmp_ch_list_t
+      range: null
+      default: '0'
+
+  cmp_module_t:
+    comparator:
+      default: 'null'
+      info: null
+      range: null
+      type: classes
+    mux:
+      default: 'null'
+      info: null
+      range: null
+      type: classes
+    triggerMode:
+      default: 'null'
+      info: null
+      range: null
+      type: classes
+  cmp_state_t:
+    callback:
+      default: 'null'
+      info: null
+      range: null
+      type: cmp_callback_t
+    callbackParam:
+      default: 'null'
+      info: null
+      range: null
+      type: void *
+    instance:
+      default: 'null'
+      info: null
+      range: null
+      type: uint32_t
+
+crc:
+  crc_user_config_t:
+    crcWidth:
+      info: Selects 16-bit or 32-bit CRC protocol.
+      type: enums
+      range: null
+      default: 'CRC_BITS_32'
+    polynomial:
+      info: null
+      type: uint32_t
+      range: null
+      default: '0x04C11DB7UL'
+    readTranspose:
+      info: Type of transpose when reading CRC result.
+      type: enums
+      range: null
+      default: 'CRC_TRANSPOSE_BITS_AND_BYTES'
+    writeTranspose:
+      info: Type of transpose when writing CRC input data.
+      type: enums
+      range: null
+      default: 'CRC_TRANSPOSE_BITS'
+    complementChecksum:
+      info: True if the result shall be complement of the actual checksum.
+      type: bool
+      range: null
+      default: 'true'
+    seed:
+      info: Starting checksum value.
+      type: uint32_t
+      range: 0x0UL,0xFFFFFFFFUL
+      default: '0xFFFFFFFFUL'
+
+dac:
+  dac_module_t:
+    sampleRate:
+      info: DAC Sampling rate.
+      type: uint32_t
+      range: null
+      default: '100000'
+    waterLine:
+      info: null
+      type: uint32_t
+      range: null
+      default: 'null'
+    refreshClkNum:
+      info: DAC refresh mode鈥檚 refresh clock number.
+      type: enums
+      range: null
+      default: '0x4'
+    interruptEnable:
+      info: True if interrupt is enabled.
+      type: bool
+      range: null
+      default: 'false'
+    state:
+      info: True if DAC is enabled.
+      type: bool
+      range: null
+      default: 'true'
+    refresh:
+      info: True if refresh is enabled.
+      type: bool
+      range: null
+      default: 'false'
+    dataMode:
+      info: True if date mode is enabled.
+      type: bool
+      range: null
+      default: 'true'
+    outputVolBuf:
+      info: True if voltage buffer is enabled.
+      type: bool
+      range: null
+      default: 'false'
+ewm:
+  ewm_init_config_t:
+    assertLogic:
+      info: Assert logic for EWM input pin.
+      type: enums
+      range: null
+      default: 'EWM_IN_ASSERT_DISABLED'
+    interruptEnable:
+      info: Enable EWM interrupt.
+      type: bool
+      range: null
+      default: 'true'
+    prescaler:
+      info: EWM clock prescaler.
+      type: uint8_t
+      range: null
+      default: '0x1'
+    compareLow:
+      info: Compare low value.
+      type: uint8_t
+      range: null
+      default: '0x2'
+    compareHigh:
+      info: Compare high value.
+      type: uint8_t
+      range: null
+      default: '0xFE'
+superio_i2c:
+  superio_i2c_master_user_config_t:
+    slaveAddress:
+      info: Slave address, 7-bit.
+      type: uint16_t
+      range: 0x0,0x7f
+      default: '32U'
+    driverType:
+      info: Driver type
+      type: enums
+      range: null
+      default: 'interrupts'
+    baudRate:
+      info: Baud rate in hertz.
+      type: uint32_t
+      range: 100,100000UL
+      default: '100UL'
+    sdaPin:
+      info: SuperIO pin to use as I2C SDA pin.
+      type: uint8_t
+      range: 0,7
+      default: '0'
+    sclPin:
+      info: SuperIO pin to use as I2C SCL pin.
+      type: uint8_t
+      range: 0,7
+      default: '1'
+    rxDMAChannel:
+      info: Rx PDMA channel number. Only used in PDMA mode.
+      type: uint8_t
+      range: 0,32
+      default: '0'
+    txDMAChannel:
+      info: Tx PDMA channel number. Only used in PDMA mode.
+      type: uint8_t
+      range: 0,32
+      default: '0'
+superio_i2s:
+  superio_i2s_master_user_config_t:
+    driverType:
+      info: 'Driver type: interrupts/polling/PDMA.'
+      type: enums
+      range: null
+      default: 'interrupts'
+    baudRate:
+      info: Baud rate in hertz.
+      type: uint32_t
+      range: 100,100000
+      default: '1000'
+    bitsWidth:
+      info: Number of bits in a word - multiple of 8.
+      type: uint8_t
+      range: 7,10
+      default: '8'
+    txPin:
+      info: Superio pin to use for transmit.
+      type: uint8_t
+      range: 0,7
+      default: '0'
+    rxPin:
+      info: Superio pin to use for receive.
+      type: uint8_t
+      range: 0,7
+      default: '1'
+    sckPin:
+      info: Superio pin to use for serial clock.
+      type: uint8_t
+      range: 0,7
+      default: '2'
+    wsPin:
+      info: Superio pin to use for word select.
+      type: uint8_t
+      range: 0,7
+      default: '3'
+    rxDMAChannel:
+      info: Rx PDMA channel number. Only used in PDMA mode.
+      type: uint8_t
+      range: 0,32
+      default: '0'
+    txDMAChannel:
+      info: Tx PDMA channel number. Only used in PDMA mode.
+      type: uint8_t
+      range: 0,32
+      default: '0'
+  superio_i2s_slave_user_config_t:
+    driverType:
+      info: 'Driver type: interrupts/polling/PDMA.'
+      type: enums
+      range: null
+      default: 'interrupts'
+    bitsWidth:
+      info: Number of bits in a word - multiple of 8.
+      type: uint8_t
+      range: 7,10
+      default: '8'
+    txPin:
+      info: Superio pin to use for transmit.
+      type: uint8_t
+      range: 0,7
+      default: '0'
+    rxPin:
+      info: Superio pin to use for receive.
+      type: uint8_t
+      range: 0,7
+      default: '1'
+    sckPin:
+      info: Superio pin to use for serial clock.
+      type: uint8_t
+      range: 0,7
+      default: '2'
+    wsPin:
+      info: Superio pin to use for word select.
+      type: uint8_t
+      range: 0,7
+      default: '3'
+    rxDMAChannel:
+      info: Rx PDMA channel number. Only used in PDMA mode.
+      type: uint8_t
+      range: 0,32
+      default: '0'
+    txDMAChannel:
+      info: Tx PDMA channel number. Only used in PDMA mode.
+      type: uint8_t
+      range: 0,32
+      default: '0'
+superio_pwm:
+  superio_pwm_channel_cfg_t:
+    driverType:
+      info: 'Driver type: interrupts/polling/PDMA.'
+      type: enums
+      range: null
+      default: 'SUPERIO_DRIVER_TYPE_INTERRUPTS'
+    PinId:
+      info: 'Superio used pin index'
+      type: uint8_t
+      range: 0,7
+      default: '1U'
+    Period:
+      info: 'Pwm period in ticks'
+      type: uint16_t
+      range: 1,0xff
+      default: '300U'
+    DutyCycle:
+      info: 'Pwm duty cycle in ticks'
+      type: uint8_t
+      range: 1,0xff
+      default: '150U'
+    Prescaler:
+      info: 'Counter decrement clock prescaler'
+      type: enums
+      range: null
+      default: 'SUPERIO_PWM_DECREMENT_CLK_SHIFT_TMR'
+    Polarity:
+      info: 'Pwm output polarity'
+      type: enums
+      range: null
+      default: 'SUPERIO_PWM_ACTIVE_HIGH'
+    TimerEnable:
+      info: 'TimerEnable'
+      type: enums
+      range: null
+      default: 'SUPERIO_PWM_ENABLE_ALWAYS'
+    triggerSrc:
+      info: 'triggerSrc'
+      type: enums
+      range: null
+      default: 'SUPERIO_PWM_TRIGGER_SOURCE_EXTERNAL'
+    triggerPolarity:
+      info: 'triggerPolarity'
+      type: enums
+      range: null
+      default: 'SUPERIO_PWM_TRIGGER_POLARITY_HIGH'
+    triggerSel:
+      info: 'triggerSel'
+      type: uint8_t
+      range: 0,0xf
+      default: '0U'
+superio_spi:
+  superio_spi_master_user_config_t:
+    baudRate:
+      info: Baud rate in hertz.
+      type: uint32_t
+      range: 2400UL,3000000UL
+      default: '115200UL'
+    driverType:
+      info: 'Driver type: interrupts/polling/PDMA.'
+      type: enums
+      range: null
+      default: 'SUPERIO_DRIVER_TYPE_INTERRUPTS'
+    bitOrder:
+      info: 'Bit order: LSB-first / MSB-first.'
+      type: enums
+      range: null
+      default: 'SUPERIO_SPI_TRANSFER_MSB_FIRST'
+    transferSize:
+      info: 'Transfer size in bytes: 1/2/4.'
+      type: enums
+      range: null
+      default: 'SUPERIO_SPI_TRANSFER_1BYTE'
+    clockPolarity:
+      info: Clock Polarity (CPOL) 0 = active-high clock; 1 = active-low clock.
+      type: uint8_t
+      range: 0,1
+      default: '0U'
+    clockPhase:
+      info: Clock Phase (CPHA) 0 = sample on leading clock edge; 1 = sample on trailing
+        clock edge.
+      type: uint8_t
+      range: 0,1
+      default: '0U'
+    mosiPin:
+      info: superio pin to use as MOSI pin.
+      type: uint8_t
+      range: 0,7
+      default: '1U'
+    misoPin:
+      info: superio pin to use as MISO pin.
+      type: uint8_t
+      range: 0,7
+      default: '2U'
+    sckPin:
+      info: superio pin to use as SCK pin.
+      type: uint8_t
+      range: 0,7
+      default: '3U'
+    ssPin:
+      info: superio pin to use as SS pin.
+      type: uint8_t
+      range: 0,7
+      default: '4U'
+    rxDMAChannel:
+      info: Rx PDMA channel number. Only used in PDMA mode.
+      type: uint8_t
+      range: 0,32
+      default: '0U'
+    txDMAChannel:
+      info: Tx PDMA channel number. Only used in PDMA mode.
+      type: uint8_t
+      range: 0,32
+      default: '2U'
+  superio_spi_slave_user_config_t:
+    driverType:
+      info: 'Driver type: interrupts/polling/PDMA.'
+      type: enums
+      range: null
+      default: 'SUPERIO_DRIVER_TYPE_INTERRUPTS'
+    bitOrder:
+      info: 'Bit order: LSB-first / MSB-firs.'
+      type: enums
+      range: null
+      default: 'SUPERIO_SPI_TRANSFER_MSB_FIRST'
+    transferSize:
+      info: 'Transfer size in bytes: 1/2/4.'
+      type: enums
+      range: null
+      default: 'SUPERIO_SPI_TRANSFER_1BYTE'
+    clockPolarity:
+      info: Clock Polarity (CPOL) 0 = active-low clock; 1 = active-high clock.
+      type: uint8_t
+      range: 0,1
+      default: '0U'
+    clockPhase:
+      info: Clock Phase (CPHA) 0 = sample on leading clock edge; 1 = sample on trailing
+        clock edge.
+      type: uint8_t
+      range: 0,1
+      default: '0U'
+    mosiPin:
+      info: superio pin to use as MOSI pin.
+      type: uint8_t
+      range: 0,7
+      default: '4U'
+    misoPin:
+      info: superio pin to use as MISO pin.
+      type: uint8_t
+      range: 0,7
+      default: '5U'
+    sckPin:
+      info: superio pin to use as SCK pin.
+      type: uint8_t
+      range: 0,7
+      default: '6U'
+    ssPin:
+      info: superio pin to use as SS pin.
+      type: uint8_t
+      range: 0,7
+      default: '7U'
+    rxDMAChannel:
+      info: Rx PDMA channel number. Only used in PDMA mode.
+      type: uint8_t
+      range: 0,32
+      default: '0U'
+    txDMAChannel:
+      info: Tx PDMA channel number. Only used in PDMA mode.
+      type: uint8_t
+      range: 0,32
+      default: '0U'
+superio_uart:
+  superio_uart_user_config_t:
+    driverType:
+      info: 'Driver type: interrupts/polling/PDMA.'
+      type: enums
+      range: null
+      default: 'SUPERIO_DRIVER_TYPE_INTERRUPTS'
+    baudRate:
+      info: Baud rate in hertz.
+      type: uint32_t
+      range: 100,3000000
+      default: '115200UL'
+    bitCount:
+      info: Number of bits per word.
+      type: uint8_t
+      range: 7,10
+      default: '8U'
+    direction:
+      info: 'Driver direction: Tx or Rx.'
+      type: enums
+      range: null
+      default: 'SUPERIO_UART_DIRECTION_TX'
+    dataPin:
+      info: SuperIO pin to use as Tx or Rx pin.
+      type: uint8_t
+      range: 0,7
+      default: '2U'
+    dmaChannel:
+      info: PDMA channel number. Only used in PDMA mode.
+      type: uint8_t
+      range: 0,32
+      default: '0U'
+gtmr:
+  gtmr_config_t:
+    triggerMode:
+      info: Mode that GTMR is triggered,GTMR must be triggered to start count.
+      type: enums
+      range: null
+      default: 'GTMR_TRIGGERMODE_SOFT'
+    interruptEnable:
+      info: Enable/Disable Interrupt.
+      type: bool
+      range: null
+      default: 'true'
+    continuousModeEnable:
+      info: Enable Continuous trigger mode.
+      type: bool
+      range: null
+      default: 'true'
+    startValue:
+      info: GTMR counter begin to count from this value.
+      type: uint32_t
+      range: null
+      default: '0xFFFE0000'
+    triggerValue:
+      info: GTMR output a trigger signal when counter equals to TriggerValue.
+      type: uint32_t
+      range: null
+      default: '0xFFFF2000'
+i2c:
+  i2c_master_user_config_t:
+    slaveAddress:
+      info: Slave address.
+      type: uint16_t
+      range: null
+      default: '0x50U'
+    is10bitAddr:
+      info: Selects 7-bit or 10-bit slave address.
+      type: bool
+      range: null
+      default: 'false'
+    operatingMode:
+      info: I2C Operating mode.
+      type: enums
+      range: null
+      default: 'I2C_STANDARD_MODE'
+    baudRate:
+      info: The baud rate in hertz to use with current slave device.
+      type: uint32_t
+      range: null
+      default: '100000UL'
+    transferType:
+      info: Type of I2C transfer.
+      type: enums
+      range: null
+      default: 'I2C_USING_INTERRUPTS'
+    dmaChannel:
+      info: dmaChannel.
+      type: uint8_t
+      range: null
+      default: '0U'
+
+  i2c_slave_user_config_t:
+    slaveAddress:
+      info: Slave address.
+      type: uint16_t
+      range: null
+      default: '0x50U'
+    is10bitAddr:
+      info: Selects 7-bit or 10-bit slave address.
+      type: bool
+      range: null
+      default: 'false'
+    operatingMode:
+      info: I2C Operating mode.
+      type: enums
+      range: null
+      default: 'I2C_STANDARD_MODE'
+    slaveListening:
+      info: Slave mode.
+      type: bool
+      range: null
+      default: 'true'
+    transferType:
+      info: Type of I2C transfer.
+      type: enums
+      range: null
+      default: 'I2C_USING_INTERRUPTS'
+    dmaChannel:
+      info: dmaChannel.
+      type: uint8_t
+      range: null
+      default: '0U'
+lin:
+  lin_user_config_t:
+    baudRate:
+      info: baudrate of LIN Hardware Interface to configure.
+      type: uint32_t
+      range: null
+      default: '9600UL'
+    nodeFunction:
+      info: Node function as Master or Slave.
+      type: bool
+      range: null
+      default: 'true'
+    autobaudEnable:
+      info: Enable Autobaud feature.
+      type: bool
+      range: null
+      default: 'false'
+    classicPID:
+      info: List of PIDs use classic checksum.
+      type: uint8_t
+      range: null
+      default: 'NULL'
+    numOfClassicPID:
+      info: Number of PIDs use classic checksum.
+      type: uint8_t
+      range: null
+      default: '255U'
+pitmr:
+  pitmr_user_config_t:
+    enableRunInDebug:
+      info: Timer channels continue to run in debug mode.
+      type: bool
+      range: null
+      default: 'false'
+    enableRunInDoze:
+      info: Timer channels continue to run in doze mode.
+      type: bool
+      range: null
+      default: 'false'
+  pitmr_user_channel_config_t:
+    timerMode:
+      info: Operation mode of timer channel.
+      type: enums
+      range: null
+      default: 'PITMR_PERIODIC_COUNTER'
+    periodUnits:
+      info: Timer period value units.
+      type: enums
+      range: null
+      default: 'PITMR_PERIOD_UNITS_MICROSECONDS'
+    period:
+      info: Period of timer channel.
+      type: uint32_t
+      range: null
+      default: '10000U'
+    triggerSource:
+      info: Selects between internal and external trigger sources.
+      type: enums
+      range: null
+      default: 'PITMR_TRIGGER_SOURCE_EXTERNAL'
+    triggerSelect:
+      info: Selects one trigger from the internal trigger sources this field makes sense if trigger source is internal.
+      type: uint32_t
+      range: null
+      default: '0U'
+    enableReloadOnTrigger:
+      info: Timer channel will reload on selected trigger.
+      type: bool
+      range: null
+      default: 'false'
+    enableStopOnInterrupt:
+      info: Timer will stop after timeout.
+      type: bool
+      range: null
+      default: 'false'
+    enableStartOnTrigger:
+      info: Timer channel starts to decrement when rising edge on selected trigger is detected.
+      type: bool
+      range: null
+      default: 'false'
+    chainChannel:
+      info: Channel chaining enable.
+      type: bool
+      range: null
+      default: 'false'
+    isInterruptEnabled:
+      info: Timer channel interrupt generation enable.
+      type: bool
+      range: null
+      default: 'true'
+spi:
+  spi_master_config_t:
+    bitsPerSec:
+      info: Baud rate in bits per second.
+      type: uint32_t
+      range: null
+      default: '1000000UL'
+    euWhichPcs:
+      info: Selects which PCS to use.
+      type: enums
+      range: null
+      default: 'LPSPI_PCS0'
+    euPcsPolarity:
+      info: PCS polarity.
+      type: enums
+      range: null
+      default: 'LPSPI_ACTIVE_HIGH'
+    isPcsContinuous:
+      info: Keeps PCS asserted until transfer complete.
+      type: bool
+      range: null
+      default: 'false'
+    bitcount:
+      info: Number of bits/frame, minimum is 8-bits.
+      type: uint16_t
+      range: null
+      default: '8U'
+    spiSrcClk:
+      info: Module source clock.
+      type: uint16_t
+      range: null
+      default: '600000000UL'
+    euClkPhase:
+      info: Selects which phase of clock to capture data.
+      type: enums
+      range: null
+      default: 'SPI_CLOCK_PHASE_1ST_EDGE'
+    euClkPolarity:
+      info: Selects clock polarity.
+      type: enums
+      range: null
+      default: 'SPI_SCK_ACTIVE_HIGH'
+    lsbFirst:
+      info: Option to transmit LSB first.
+      type: bool
+      range: null
+      default: 'false'
+    euTransferType:
+      info: Type of SPI transfer.
+      type: enums
+      range: null
+      default: 'SPI_USING_INTERRUPTS'
+    rxDMAChannel:
+      info: Channel number for DMA rx channel.
+      type: uint8_t
+      range: null
+      default: '0U'
+    txDMAChannel:
+      info: Channel number for DMA tx channel.
+      type: uint8_t
+      range: null
+      default: '0U'
+    euWidth:
+      info: Transfer bit width.
+      type: enums
+      range: null
+      default: 'SPI_SINGLE_BIT_XFER'
+    euRequestSelect:
+      info: Host request select.
+      type: enums
+      range: null
+      default: 'SPI_TRIGGER_TRIGGER'
+    euRequestPolarity:
+      info: Hreq Request polarity.
+      type: enums
+      range: null
+      default: 'SPI_REQUEST_POLARITY_LOW'
+    RequestEnable:
+      info: trigger Enable.
+      type: bool
+      range: null
+      default: 'false'
+  spi_slave_config_t:
+    euPcsPolarity:
+      info: PCS polarity.
+      type: null
+      range: null
+      default: 'LPSPI_ACTIVE_HIGH'
+    bitcount:
+      info: Number of bits/frame, minimum is 8-bits.
+      type: uint16_t
+      range: null
+      default: '8U'
+    euClkPhase:
+      info: Selects which phase of clock to capture data.
+      type: enums
+      range: null
+      default: 'SPI_CLOCK_PHASE_1ST_EDGE'
+    euWhichPcs:
+      info: euWhichPcs.
+      type: enums
+      range: null
+      default: 'SPI_PCS0'
+    euClkPolarity:
+      info: Selects clock polarity.
+      type: enums
+      range: null
+      default: 'SPI_SCK_ACTIVE_HIGH'
+    lsbFirst:
+      info: Option to transmit LSB first.
+      type: bool
+      range: null
+      default: 'false'
+    euTransferType:
+      info: Type of SPI transfer.
+      type: enums
+      range: null
+      default: 'SPI_USING_INTERRUPTS'
+    rxDMAChannel:
+      info: Channel number for DMA rx channel.
+      type: uint8_t
+      range: null
+      default: '0U'
+    txDMAChannel:
+      info: Channel number for DMA tx channel.
+      type: uint8_t
+      range: null
+      default: '0U'
+    euWidth:
+      info: Transfer bit width.
+      type: enums
+      range: null
+      default: 'SPI_SINGLE_BIT_XFER'
+    stDataMatchCfg:
+      info: null
+      type: classes
+      range: null
+      default: 'null'
+
+uart:
+  uart_user_config_t:
+    baudRate:
+      info: UART baud rate.
+      type: uint32_t
+      range: null
+      default: 115200UL
+    parityMode:
+      info: Parity mode, disabled (default), even, odd.
+      type: enums
+      range: null
+      default: UART_PARITY_DISABLED
+    stopBitCount:
+      info: Number of stop bits, 1 stop bit (default) or 2 stop bits.
+      type: enums
+      range: null
+      default: UART_ONE_STOP_BIT
+    bitCountPerChar:
+      info: Number of bits in a character
+      type: enums
+      range: null
+      default: UART_8_BITS_PER_CHAR
+    transferType:
+      info: Type of UART transfer (interrupt/dma based).
+      type: enums
+      range: null
+      default: UART_USING_INTERRUPTS
+    fifoType:
+      info: Type of UART fifo depth.
+      type: enums
+      range: null
+      default: UART_FIFO_DEPTH_1
+    rxDMAChannel:
+      info: Channel number for PDMA rx channel.If PDMA mode isn't used this field will be ignored.
+      type: uint8_t
+      range: null
+      default: '0'
+    txDMAChannel:
+      info: Channel number for PDMA tx channel.If PDMA mode isn't used this field will be ignored.
+      type: uint8_t
+      range: null
+      default: '1'
+pctmr:
+  pctmr_config_t:
+    dmaRequest:
+      info: Enable/Disable PDMA requests.
+      type: bool
+      range: null
+      default: 'null'
+    interruptEnable:
+      info: Enable/Disable Interrupt.
+      type: bool
+      range: null
+      default: 'null'
+    freeRun:
+      info: Enable/Disable Free Running Mode.
+      type: bool
+      range: null
+      default: 'null'
+    workMode:
+      info: Time/Pulse Counter Mode.
+      type: enums
+      range: null
+      default: 'null'
+    clockSelect:
+      info: Clock selection for Timer/Glitch filter.
+      type: enums
+      range: null
+      default: 'null'
+    prescaler:
+      info: Prescaler Selection.
+      type: enums
+      range: null
+      default: 'null'
+    bypassPrescaler:
+      info: Enable/Disable prescaler bypass.
+      type: bool
+      range: null
+      default: 'null'
+    compareValue:
+      info: Compare value.
+      type: uint32_t
+      range: null
+      default: 'null'
+    counterUnits:
+      info: Compare value units.
+      type: enums
+      range: null
+      default: 'null'
+    pinSelect:
+      info: Pin selection for Pulse-Counter.
+      type: enums
+      range: null
+      default: 'null'
+    pinPolarity:
+      info: Pin Polarity for Pulse-Counter.
+      type: enums
+      range: null
+      default: 'null'
+pdu:
+  pdu_timer_config_t:
+    loadValueMode:
+      info: Select the load mode.
+      type: enums
+      range: null
+      default: PDU_LOAD_VAL_IMMEDIATELY
+    seqErrIntEnable:
+      info: Enable PDU Sequence Error Interrupt.
+      type: bool
+      range: null
+      default: 'false'
+    clkPreDiv:
+      info: Select the prescaler divider.
+      type: enums
+      range: null
+      default: PDU_CLK_PREDIV_BY_2
+    clkPreMultFactor:
+      info: Select multiplication factor for prescaler.
+      type: enums
+      range: null
+      default: PDU_CLK_PREMULT_FACT_AS_10
+    triggerInput:
+      info: Select the trigger input source.
+      type: enums
+      range: null
+      default: PDU_SOFTWARE_TRIGGER
+    continuousModeEnable:
+      info: Enable the continuous mode.
+      type: bool
+      range: null
+      default: 'true'
+    dmaEnable:
+      info: Enable the dma for timer.
+      type: bool
+      range: null
+      default: 'false'
+    intEnable:
+      info: Enable the interrupt for timer.
+      type: bool
+      range: null
+      default: 'true'
+    instanceBackToBackEnable:
+      info: Enable the instance back to back mode between PDU0 CH0 and PDU1 CH0 pre-triggers, forming a ring (PDU0_CH0_pretrigger7 -> PDU1_CH0_pretrigger0 and PDU1_CH0_pretrigger7 -> PDU0_CH0_pretrigger0).
+      type: bool
+      range: null
+      default: 'false'
+    interchannelBackToBackEnable:
+      info: Enable the inter-channel back to back mode between PDUx CH0 and PDUx CH1 pre-triggers, forming a ring (PDUx_CH0_pretrigger7 -> PDUx_CH1_pretrigger0 and PDUx_CH1_pretrigger7 -> PDUx_CH0_pretrigger0).
+      type: bool
+      range: null
+      default: 'false'
+  pdu_adc_pretrigger_config_t:
+    adcPreTriggerIdx:
+      info: Setting pre_trigger's index.
+      type: uint32_t
+      range: null
+      default: '0'
+    preTriggerEnable:
+      info: Enable the pre_trigger.
+      type: bool
+      range: null
+      default: 'true'
+    preTriggerOutputEnable:
+      info: Enable the pre_trigger output.
+      type: bool
+      range: null
+      default: 'false'
+    preTriggerBackToBackEnable:
+      info: Enable the back to back mode for ADC pre_trigger.
+      type: bool
+      range: null
+      default: 'false'
+pwm:
+  pwm_config_t:
+    period:
+      info: Period of the PWM signal in ticks.
+      type: uint32_t
+      range: 0x1,0xffff
+      default: '0xffff'
+    duty:
+      info: Duty cycle in ticks.
+      type: uint32_t
+      range: 0x1,0xffff
+      default: '0x1111'
+    pwm_clk_src_cfg:
+      info: Source clk.
+      type: enums
+      range: null
+      default: G_CLK
+    pwm_polarity:
+      info: Output polarity.
+      type: enums
+      range: null
+      default: S_RV_C_CMP
+    pwm_active_cfg:
+      info: Active mode.
+      type: uint8_t
+      range: 0x1,0x8
+      default: '0x1'
+    prescaler:
+      info: Prescale ratio.
+      type: uint32_t
+      range: 0x1,0xfff
+      default: '0x4'
+    repeat:
+      info: Repeat times.
+      type: enums
+      range: null
+      default: ONCE
+    water_mark:
+      info: Water mark(fifo flag is set when more than or equal to water_mark empty slots in fifo).
+      type: uint8_t
+      range: 0x1,0x4
+      default: '4'
+    int_type:
+      info: Interrupt type.
+      type: uint32_t
+      range: 0x0,0x7
+      default: INT_CIE | INT_RIE | INT_FIE
+rtc:
+  rtc_init_config_t:
+    clockSelect:
+      info: RTC Clock Select.
+      type: enums
+      range: null
+      default: 'null'
+    ipgClkGating:
+      info: GEN — IPG_CLK gating enable. Decides whether to enable or disable the ipg_clk gating.
+      type: bool
+      range: null
+      default: 'null'
+  rtc_timedate_t:
+    year:
+      info: Year.
+      type: uint16_t
+      range: null
+      default: 1970
+    month:
+      info: Month.
+      type: uint16_t
+      range: null
+      default: 1
+    day:
+      info: Day.
+      type: uint16_t
+      range: null
+      default: 2
+    hour:
+      info: Hour.
+      type: uint16_t
+      range: null
+      default: '0'
+    minutes:
+      info: Minutes.
+      type: uint16_t
+      range: null
+      default: '0'
+    seconds:
+      info: Seconds
+      type: uint8_t
+      range: null
+      default: '0'
+  rtc_alarm_config_t:
+    alarmTime:
+      info: Alarm time.
+      type: enums
+      range: null
+      default: 'null'
+    alarmIntEnable:
+      info: Enable alarm interrupt.
+      type: bool
+      range: null
+      default: 'false'
+  rtc_samping_config_t:
+    minIntEnable:
+      info: Minute Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+    dayIntEnable:
+      info: Day Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+    hz1IntEnable:
+      info: 1Hz Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+    hourIntEnable:
+      info: Hour Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+    hz2IntEnable:
+      info: 2Hz Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+    sam0IntEnable:
+      info: sampling Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+    sam1IntEnable:
+      info: sampling Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+    sam2IntEnable:
+      info: sampling Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+    sam3IntEnable:
+      info: sampling Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+    sam4IntEnable:
+      info: sampling Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+    sam5IntEnable:
+      info: sampling Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+    sam6IntEnable:
+      info: sampling Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+    sam7IntEnable:
+      info: sampling Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+  rtc_stopwatch_config_t:
+    stopwatchVal:
+      info: Stopwatch val.
+      type: uint8_t
+      range: null
+      default: '0x1'
+    stopwatchIntEnable:
+      info: Stopwatch Interrupt enable.
+      type: bool
+      range: null
+      default: 'false'
+
+tmrmux:
+  tmrmux_inout_mapping_config_t:
+    euTriggerSource:
+      info: Selects one of the TMRMUX trigger sources.
+      type: tmrmux_trigger_source_t
+      range: null
+      default: TMRMUX_TRIG_SOURCE_VDD
+    euTargetModule:
+      info: Selects one of the TMRMUX target modules.
+      type: tmrmux_target_module_t
+      range: null
+      default: TMRMUX_TARGET_MODULE_PITMR_TRG_CH0
+    lockTargetModuleReg:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+  tmrmux_user_config_t:
+    numInOutMappingConfigs:
+      info: Number of in-out mappings defined in TMRMUX configuration.
+      type: uint8_t
+      range: null
+      default: '1'
+    pstTmrmuxInOutMappingConfig:
+      info: null
+      type: tmrmux_inout_mapping_config_t *
+      range: null
+      default: g_stTmrmuxInoutMappingConfig
+trgmux:
+  trgmux_inout_mapping_config_t:
+    euTriggerSource:
+      info: Selects one of the TRGMUX trigger sources.
+      type: trgmux_trigger_source_t
+      range: null
+      default: TRGMUX_TRIG_SOURCE_VDD
+    euTargetModule:
+      info: Selects one of the TRGMUX target modules.
+      type: trgmux_target_module_t
+      range: null
+      default: TRGMUX_TARGET_MODULE_PITMR_TRG_CH0
+    lockTargetModuleReg:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+  trgmux_user_config_t:
+    numInOutMappingConfigs:
+      info: Number of in-out mappings defined in TRGMUX configuration.
+      type: uint8_t
+      range: null
+      default: '1'
+    pstTrgmuxInOutMappingConfig:
+      info: null
+      type: trgmux_inout_mapping_config_t *
+      range: null
+      default: g_stTrgmuxInoutMappingConfig
+wdog:
+  wdog_user_config_t:
+    wait:
+      info: Whether WDOG work in Wait model
+      type: enums
+      range: null
+      default: 'null'
+    stopDoze:
+      info: Whether WDOG work in Stop/doze  model
+      type: enums
+      range: null
+      default: 'null'
+    debug:
+      info: Whether WDOG work in Debug model
+      type: enums
+      range: null
+      default: 'null'
+    intEnable:
+      info: If true, an interrupt request is generated before reset
+      type: bool
+      range: null
+      default: 'null'
+    timeoutValue:
+      info: The timeout value. Timeout time = (timeoutValue * 0.5) + 0.5
+      type: uint16_t
+      range: null
+      default: 'null'
+    intValue:
+      info: Interrupt before timeout.  Interrupt time  = intValue * 0.5
+      type: uint16_t
+      range: null
+      default: 'null'
+supertmr_ic:
+  supertmr_pwm_sync_t:
+    softwareSync:
+      info: null
+      type: bool
+      range: null
+      default: 'true'
+    hardwareSync0:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    hardwareSync1:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    hardwareSync2:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    maxLoadingPoint:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    minLoadingPoint:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    inverterSync:
+      info: Configures INVCTRL sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    outRegSync:
+      info: Configures SWOCTRL sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    maskRegSync:
+      info: Configures OUTMASK sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    initCounterSync:
+      info: Configures CNTIN sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    autoClearTrigger:
+      info: Available only for hardware trigger.
+      type: bool
+      range: null
+      default: 'true'
+    syncPoint:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_UPDATE_NOW
+  supertmr_user_config_t:
+    syncMethod:
+      info: null
+      type: classes
+      range: null
+      default: 'null'
+    supertmrMode:
+      info: Mode of operation for SUPERTMR.
+      type: enums
+      range: null
+      default: SUPERTMR_MODE_EDGE_ALIGNED_PWM
+    supertmrPrescaler:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_CLOCK_DIVID_BY_1
+    supertmrClockSource:
+      info: Select clock source for SUPERTMR.
+      type: enums
+      range: null
+      default: SUPERTMR_CLOCK_SOURCE_SYSTEMCLK
+    BDMMode:
+      info: Select SUPERTMR behavior in BDM mode.
+      type: enums
+      range: null
+      default: SUPERTMR_BDM_MODE_11
+    isTofIsrEnabled:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    enableInitializationTrigger:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+  supertmr_input_ch_param_t:
+    hwChannelId:
+      info: Physical hardware channel ID.
+      type: uint8_t
+      range: null
+      default: '0U'
+    inputMode:
+      info: SuperTimer module mode of operation.
+      type: enums
+      range: null
+      default: SUPERTMR_EDGE_DETECT
+    edgeAlignement:
+      info: Edge alignment Mode for signal measurement.
+      type: enums
+      range: null
+      default: SUPERTMR_RISING_EDGE
+    measurementType:
+      info: Measurement Mode for signal measurement.
+      type: enums
+      range: null
+      default: SUPERTMR_FALLING_EDGE_PERIOD_MEASUREMENT
+    filterValue:
+      info: Filter Value.
+      type: uint16_t
+      range: null
+      default: '0U'
+    filterEn:
+      info: Input capture filter state.
+      type: bool
+      range: null
+      default: 'false'
+    continuousModeEn:
+      info: Continuous measurement state.
+      type: bool
+      range: null
+      default: 'true'
+    channelsCallbacksParams:
+      info: The parameters of callback functions for channels events. *
+      type: void *
+      range: null
+      default: 'NULL'
+    channelsCallbacks:
+      info: The callback function for channels events.
+      type: ic_callback_t
+      range: null
+      default: 'NULL'
+  supertmr_input_param_t:
+    nNumChannels:
+      info: Number of input capture channel used.
+      type: uint8_t
+      range: null
+      default: 1U
+    nMaxCountValue:
+      info: Maximum counter value. Minimum value is 0 for this mode.
+      type: uint16_t
+      range: null
+      default: 65535U
+    inputChConfig:
+      info: null
+      type: supertmr_input_ch_param_t *
+      range: null
+      default: 'null'
+supertmr_mc:
+  supertmr_pwm_sync_t:
+    softwareSync:
+      info: null
+      type: bool
+      range: null
+      default: 'true'
+    hardwareSync0:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    hardwareSync1:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    hardwareSync2:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    maxLoadingPoint:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    minLoadingPoint:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    inverterSync:
+      info: Configures INVCTRL sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    outRegSync:
+      info: Configures SWOCTRL sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    maskRegSync:
+      info: Configures OUTMASK sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    initCounterSync:
+      info: Configures CNTIN sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    autoClearTrigger:
+      info: Available only for hardware trigger.
+      type: bool
+      range: null
+      default: 'true'
+    syncPoint:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_UPDATE_NOW
+  supertmr_user_config_t:
+    syncMethod:
+      info: null
+      type: classes
+      range: null
+      default: 'null'
+    supertmrMode:
+      info: Mode of operation for SUPERTMR.
+      type: enums
+      range: null
+      default: SUPERTMR_MODE_EDGE_ALIGNED_PWM
+    supertmrPrescaler:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_CLOCK_DIVID_BY_1
+    supertmrClockSource:
+      info: Select clock source for SUPERTMR.
+      type: enums
+      range: null
+      default: SUPERTMR_CLOCK_SOURCE_SYSTEMCLK
+    BDMMode:
+      info: Select SUPERTMR behavior in BDM mode.
+      type: enums
+      range: null
+      default: SUPERTMR_BDM_MODE_11
+    isTofIsrEnabled:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    enableInitializationTrigger:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+  supertmr_timer_param_t:
+    mode:
+      info: SUPERTMR mode.
+      type: supertmr_config_mode_t
+      range: null
+      default: SUPERTMR_MODE_UP_TIMER
+    initialValue:
+      info: Initial counter value.
+      type: uint16_t
+      range: null
+      default: '0'
+    finalValue:
+      info: Final counter value.
+      type: uint16_t
+      range: null
+      default: '31250'
+supertmr_oc:
+  supertmr_pwm_sync_t:
+    softwareSync:
+      info: null
+      type: bool
+      range: null
+      default: 'true'
+    hardwareSync0:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    hardwareSync1:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    hardwareSync2:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    maxLoadingPoint:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    minLoadingPoint:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    inverterSync:
+      info: Configures INVCTRL sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    outRegSync:
+      info: Configures SWOCTRL sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    maskRegSync:
+      info: Configures OUTMASK sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    initCounterSync:
+      info: Configures CNTIN sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    autoClearTrigger:
+      info: Available only for hardware trigger.
+      type: bool
+      range: null
+      default: 'true'
+    syncPoint:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_UPDATE_NOW
+  supertmr_user_config_t:
+    syncMethod:
+      info: null
+      type: classes
+      range: null
+      default: 'null'
+    supertmrMode:
+      info: Mode of operation for SUPERTMR.
+      type: enums
+      range: null
+      default: SUPERTMR_MODE_EDGE_ALIGNED_PWM
+    supertmrPrescaler:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_CLOCK_DIVID_BY_1
+    supertmrClockSource:
+      info: Select clock source for SUPERTMR.
+      type: enums
+      range: null
+      default: SUPERTMR_CLOCK_SOURCE_SYSTEMCLK
+    BDMMode:
+      info: Select SUPERTMR behavior in BDM mode.
+      type: enums
+      range: null
+      default: SUPERTMR_BDM_MODE_11
+    isTofIsrEnabled:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    enableInitializationTrigger:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+  supertmr_output_cmp_ch_param_t:
+    hwChannelId:
+      info: null
+      type: uint8_t
+      range: null
+      default: 'null'
+    chMode:
+      info: null
+      type: enums
+      range: null
+      default: 'null'
+    comparedValue:
+      info: null
+      type: uint16_t
+      range: null
+      default: 'null'
+    enableExternalTrigger:
+      info: null
+      type: bool
+      range: null
+      default: 'null'
+  supertmr_output_cmp_param_t:
+    nNumOutputChannels:
+      info: null
+      type: uint8_t
+      range: null
+      default: 'null'
+    mode:
+      info: null
+      type: supertmr_config_mode_t
+      range: null
+      default: 'null'
+    maxCountValue:
+      info: null
+      type: uint16_t
+      range: null
+      default: 'null'
+    outputChannelConfig:
+      info: null
+      type: supertmr_output_cmp_ch_param_t *
+      range: null
+      default: 'null'
+supertmr_pwm:
+  supertmr_pwm_sync_t:
+    softwareSync:
+      info: null
+      type: bool
+      range: null
+      default: 'true'
+    hardwareSync0:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    hardwareSync1:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    hardwareSync2:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    maxLoadingPoint:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    minLoadingPoint:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    inverterSync:
+      info: Configures INVCTRL sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    outRegSync:
+      info: Configures SWOCTRL sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    maskRegSync:
+      info: Configures OUTMASK sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    initCounterSync:
+      info: Configures CNTIN sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    autoClearTrigger:
+      info: Available only for hardware trigger.
+      type: bool
+      range: null
+      default: 'true'
+    syncPoint:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_UPDATE_NOW
+  supertmr_user_config_t:
+    syncMethod:
+      info: null
+      type: classes
+      range: null
+      default: 'null'
+    supertmrMode:
+      info: Mode of operation for SUPERTMR.
+      type: enums
+      range: null
+      default: SUPERTMR_MODE_EDGE_ALIGNED_PWM
+    supertmrPrescaler:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_CLOCK_DIVID_BY_1
+    supertmrClockSource:
+      info: Select clock source for SUPERTMR.
+      type: enums
+      range: null
+      default: SUPERTMR_CLOCK_SOURCE_SYSTEMCLK
+    BDMMode:
+      info: Select SUPERTMR behavior in BDM mode.
+      type: enums
+      range: null
+      default: SUPERTMR_BDM_MODE_11
+    isTofIsrEnabled:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    enableInitializationTrigger:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+  supertmr_pwm_ch_fault_param_t:
+    faultChannelEnabled:
+      info: Fault channel state.
+      type: bool
+      range: null
+      default: 'false'
+    faultFilterEnabled:
+      info: Fault channel filter state.
+      type: bool
+      range: null
+      default: 'false'
+    supertmrFaultPinPolarity:
+      info: Channel output state on fault.
+      type: enums
+      range: null
+      default: SUPERTMR_POLARITY_LOW
+  supertmr_pwm_fault_param_t:
+    pwmOutputStateOnFault:
+      info: Output pin state on fault (safe state or tri-state).
+      type: bool
+      range: null
+      default: 'false'
+    pwmFaultInterrupt:
+      info: PWM fault interrupt state.
+      type: bool
+      range: null
+      default: 'false'
+    faultFilterValue:
+      info: Fault filter value.
+      type: uint8_t
+      range: null
+      default: '0U'
+    faultMode:
+      info: Fault mode.
+      type: enums
+      range: null
+      default: SUPERTMR_FAULT_CONTROL_DISABLED
+    supertmrFaultChannelParam:
+      info: null
+      type: classes
+      range: null
+      default: 'null'
+  supertmr_independent_ch_param_t:
+    hwChannelId:
+      info: Physical hardware channel ID.
+      type: uint8_t
+      range: null
+      default: '0'
+    polarity:
+      info: Polarity of the PWM signal generated on MCU pin.
+      type: enums
+      range: null
+      default: SUPERTMR_POLARITY_HIGH
+    uDutyCyclePercent:
+      info: null
+      type: uint16_t
+      range: 0,0x8000
+      default: '0x4000'
+    enableExternalTrigger:
+      info: null
+      type: bool
+      range: null
+      default: 'true'
+    safeState:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_LOW_STATE
+    enableSecondChannelOutput:
+      info: Enable complementary mode on next channel.
+      type: bool
+      range: null
+      default: 'false'
+    secondChannelPolarity:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_MAIN_INVERTED
+    deadTime:
+      info: Enable/disable dead time for channel.
+      type: bool
+      range: null
+      default: 'false'
+  supertmr_combined_ch_param_t:
+    hwChannelId:
+      info: Physical hardware channel ID for channel (n).
+      type: uint8_t
+      range: null
+      default: '0'
+    firstEdge:
+      info: null
+      type: uint16_t
+      range: null
+      default: '0'
+    secondEdge:
+      info: null
+      type: uint16_t
+      range: null
+      default: '0x3000'
+    deadTime:
+      info: Enable/disable dead time for channel.
+      type: bool
+      range: null
+      default: 'false'
+    enableModifiedCombine:
+      info: Enable/disable the modified combine mode for channels (n) and (n+1)
+      type: bool
+      range: null
+      default: 'true'
+    mainChannelPolarity:
+      info: Polarity of the PWM signal generated on MCU pin for channel n.
+      type: enums
+      range: null
+      default: SUPERTMR_POLARITY_HIGH
+    enableSecondChannelOutput:
+      info: Select if channel (n+1)  output is enabled/disabled for the complementary
+        mode.
+      type: bool
+      range: null
+      default: 'false'
+    secondChannelPolarity:
+      info: Select channel (n+1) polarity relative to channel (n) in the complementary
+        mode.
+      type: enums
+      range: null
+      default: SUPERTMR_MAIN_INVERTED
+    enableExternalTrigger:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    enableExternalTriggerOnNextChn:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    mainChannelSafeState:
+      info: The selection of the channel (n) state when fault is detected.
+      type: enums
+      range: null
+      default: SUPERTMR_LOW_STATE
+    secondChannelSafeState:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_LOW_STATE
+  supertmr_pwm_param_t:
+    nNumIndependentPwmChannels:
+      info: Number of independent PWM channels.
+      type: uint8_t
+      range: null
+      default: '0U'
+    nNumCombinedPwmChannels:
+      info: null
+      type: uint8_t
+      range: null
+      default: 'null'
+    mode:
+      info: SUPERTMR mode.
+      type: supertmr_config_mode_t
+      range: null
+      default: SUPERTMR_MODE_EDGE_ALIGNED_PWM
+    deadTimeValue:
+      info: Dead time value in [ticks].
+      type: uint8_t
+      range: null
+      default: 48U
+    deadTimePrescaler:
+      info: Dead time pre-scaler value[ticks].
+      type: supertmr_deadtime_ps_t
+      range: null
+      default: SUPERTMR_DEADTIME_DIVID_BY_4
+    uFrequencyHZ:
+      info: PWM period in Hz.
+      type: uint32_t
+      range: null
+      default: 10000U
+    pwmIndependentChannelConfig:
+      info: Configuration for independent PWM channels.
+      type: supertmr_independent_ch_param_t *
+      range: null
+      default: 'NULL'
+    pwmCombinedChannelConfig:
+      info: null
+      type: supertmr_combined_ch_param_t *
+      range: null
+      default: 'null'
+    faultConfig:
+      info: null
+      type: supertmr_pwm_fault_param_t *
+      range: null
+      default: 'null'
+supertmr_qd:
+  supertmr_pwm_sync_t:
+    softwareSync:
+      info: null
+      type: bool
+      range: null
+      default: 'true'
+    hardwareSync0:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    hardwareSync1:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    hardwareSync2:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    maxLoadingPoint:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    minLoadingPoint:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    inverterSync:
+      info: Configures INVCTRL sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    outRegSync:
+      info: Configures SWOCTRL sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    maskRegSync:
+      info: Configures OUTMASK sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    initCounterSync:
+      info: Configures CNTIN sync.
+      type: enums
+      range: null
+      default: SUPERTMR_PWM_SYNC
+    autoClearTrigger:
+      info: Available only for hardware trigger.
+      type: bool
+      range: null
+      default: 'true'
+    syncPoint:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_UPDATE_NOW
+  supertmr_user_config_t:
+    syncMethod:
+      info: null
+      type: classes
+      range: null
+      default: 'null'
+    supertmrMode:
+      info: Mode of operation for SUPERTMR.
+      type: enums
+      range: null
+      default: SUPERTMR_MODE_EDGE_ALIGNED_PWM
+    supertmrPrescaler:
+      info: null
+      type: enums
+      range: null
+      default: SUPERTMR_CLOCK_DIVID_BY_1
+    supertmrClockSource:
+      info: Select clock source for SUPERTMR.
+      type: enums
+      range: null
+      default: SUPERTMR_CLOCK_SOURCE_SYSTEMCLK
+    BDMMode:
+      info: Select SUPERTMR behavior in BDM mode.
+      type: enums
+      range: null
+      default: SUPERTMR_BDM_MODE_11
+    isTofIsrEnabled:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+    enableInitializationTrigger:
+      info: null
+      type: bool
+      range: null
+      default: 'false'
+  supertmr_phase_params_t:
+    phaseInputFilter:
+      info: null
+      type: bool
+      range: null
+      default: 'null'
+    phaseFilterVal:
+      info: null
+      type: uint8_t
+      range: null
+      default: 'null'
+    phasePolarity:
+      info: null
+      type: enums
+      range: null
+      default: 'null'
+  supertmr_quad_decode_config_t:
+    mode:
+      info: null
+      type: enums
+      range: null
+      default: 'null'
+    initialVal:
+      info: null
+      type: uint16_t
+      range: null
+      default: 'null'
+    maxVal:
+      info: null
+      type: uint16_t
+      range: null
+      default: 'null'
+    phaseAConfig:
+      info: null
+      type: classes
+      range: null
+      default: 'null'
+    phaseBConfig:
+      info: null
+      type: classes
+      range: null
+      default: 'null'

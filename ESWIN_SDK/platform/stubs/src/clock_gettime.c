@@ -1,0 +1,25 @@
+/* See LICENSE of license details. */
+#if defined ( __GNUC__ )
+#include "eswin_sdk_soc.h"
+#include <errno.h>
+#include <time.h>
+
+#include <sys/time.h>
+
+
+extern int _gettimeofday(struct timeval *tp, void *tzp);
+
+/* Get current value of CLOCK and store it in tp.  */
+__WEAK int clock_gettime(clockid_t clock_id, struct timespec *tp)
+{
+	struct timeval tv;
+	int retval = -1;
+
+	retval = _gettimeofday(&tv, NULL);
+	if (retval == 0)
+		TIMEVAL_TO_TIMESPEC(&tv, tp);
+
+	return retval;
+}
+#else
+#endif

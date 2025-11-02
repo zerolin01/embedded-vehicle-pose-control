@@ -1,0 +1,37 @@
+iopmp_master_access_right_t:
+  masterNum:
+    info: Master number.
+    type: uint8_t
+    range: null
+    default: '0'
+  regionLock:
+    info: Lock region.
+    type: bool
+    range: null
+    default: 'false'
+  regionSize:
+    info: Memory region size.
+    type: uint32_t
+    range: null
+    default: '0'
+  accessRight:
+    info: Access right.
+    type: enums
+    range: null
+    default: IOPMP_MACHINE_RW_USER_RW
+iopmp_user_config_t:
+  addrLock:
+    info: ' '
+    type: bool
+    range: null
+    default: 'false'
+  startAddr:
+    info: Memory region start address.
+    type: uint32_t
+    range: null
+    default: '0'
+  masterAccRight:
+    info: null
+    type: const iopmp_master_access_right_t *
+    range: null
+    default: null
